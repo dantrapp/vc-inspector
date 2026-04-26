@@ -35,7 +35,7 @@ In plain English: someone issues a credential, a person or wallet holds it, and 
 
 VC Inspector does not perform cryptographic signature-byte verification.
 
-That is deliberate. Real verification requires resolving the issuer's DID Document through a trusted resolver, retrieving verification material, checking proof suites, canonicalizing the signed data, and using standards-aware identity libraries.
+That is deliberate. Real verification requires resolving the issuer's DID Document through a trusted resolver, retrieving verification material, checking proof suites, canonicalizing the signed data, and using a standards-aware identity library such as SpruceID's open-source `ssi`.
 
 This tool validates credential structure, offline DID proof wiring, and trust-relevant metadata before deeper verification.
 
@@ -92,8 +92,10 @@ Trust Flow:
 issuer -> holder -> verifier
 ```
 
-## How To Explain This To A Non-Engineer
+## ELI5
 
-This tool checks whether a digital credential has the basic pieces a verifier would need before trusting it. When given a DID Document, it also checks whether the issuer controls and authorizes the key referenced by the proof. It does not prove the credential is authentic by itself; it shows where trust-relevant information is present, missing, expired, mismatched, or outside the tool's scope.
+Think of a digital credential like an ID card.
 
-That boundary is the point.
+This tool checks whether the card has the important parts: who issued it, who it is for, whether it expired, and what key was supposed to sign it. If you give it the issuer's DID Document, it also checks whether that key actually belongs to the issuer.
+
+It does not fully prove the ID is real yet. It checks whether the ID is structured correctly before deeper cryptographic verification.
