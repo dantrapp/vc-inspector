@@ -53,9 +53,17 @@ Required first version:
 - Credential status metadata is present, otherwise warn that revocation cannot be checked.
 - Signature bytes are not verified, otherwise warn that proof validity remains out of scope.
 
+Each check includes:
+
+- Stable ID, such as `did_control.assertion_method`.
+- Category, such as `did_control` or `revocation`.
+- Status: `pass`, `warn`, or `fail`.
+- Human-readable message.
+- Short explanation of why the check matters.
+
 ## Output Shape
 
-The output should be understandable without knowing Rust:
+The text output should be understandable without knowing Rust:
 
 ```text
 VC INSPECTION REPORT
@@ -79,6 +87,28 @@ Trust Flow:
 issuer -> holder -> verifier
 ```
 
+The JSON output should be stable enough for automation:
+
+```json
+{
+  "schema_version": "1.0",
+  "format": "JSON-LD Verifiable Credential",
+  "issuer": "did:example:dmv",
+  "subject": "did:example:person123",
+  "credential_types": ["VerifiableCredential", "MobileDriverLicenseCredential"],
+  "overall_status": "warning",
+  "checks": [
+    {
+      "id": "revocation.status_metadata",
+      "category": "revocation",
+      "status": "warn",
+      "message": "No credentialStatus field; revocation cannot be checked from this credential",
+      "why_it_matters": "Without credential status metadata, this tool cannot identify where revocation should be checked."
+    }
+  ]
+}
+```
+
 ## Example Credentials
 
 - `valid-degree.json`: clean credential with proof and credential status.
@@ -96,5 +126,7 @@ issuer -> holder -> verifier
 - `cargo test` passes.
 - CLI works against all example credentials.
 - CLI supports `--did-doc` to check issuer DID proof wiring.
+- CLI supports `--json` for machine-readable output.
+- CLI supports `--markdown-report` for reviewable report artifacts.
 - README explains what the tool does, what it does not do, and why that boundary matters.
 - The project can be explained as: "It checks whether a digital credential has the pieces a verifier would care about, including whether the claimed issuer document controls the key referenced by the proof, before deeper cryptographic verification."

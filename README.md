@@ -39,6 +39,18 @@ That is deliberate. Real verification requires resolving the issuer's DID Docume
 
 This tool validates credential structure, offline DID proof wiring, and trust-relevant metadata before deeper verification.
 
+## Use Case
+
+VC Inspector is a pre-verification diagnostic tool. It is useful when integrating credential issuance or verification flows and you need to answer basic questions before deeper cryptographic verification:
+
+- Is the credential malformed?
+- Is required metadata missing?
+- Is the credential expired?
+- Does the proof point to a key controlled by the issuer DID Document?
+- Is credential status metadata present for later revocation checks?
+
+The JSON output is intended for automation, CI checks, or a future UI. The Markdown output is intended for review notes, demos, and debugging handoffs.
+
 ## Run It
 
 ```sh
@@ -49,6 +61,18 @@ Run it with an issuer DID Document:
 
 ```sh
 cargo run -p vc_inspector_cli -- examples/valid-degree.json --did-doc examples/did-docs/university.json
+```
+
+Print machine-readable JSON:
+
+```sh
+cargo run -p vc_inspector_cli -- examples/valid-degree.json --did-doc examples/did-docs/university.json --json
+```
+
+Write a Markdown report:
+
+```sh
+cargo run -p vc_inspector_cli -- examples/valid-degree.json --did-doc examples/did-docs/university.json --markdown-report examples/reports/valid-degree.md
 ```
 
 Try the warning and failure examples:
@@ -90,6 +114,26 @@ Checks:
 
 Trust Flow:
 issuer -> holder -> verifier
+```
+
+## JSON Output
+
+The JSON report uses a stable schema version and explicit check IDs:
+
+```json
+{
+  "schema_version": "1.0",
+  "overall_status": "warning",
+  "checks": [
+    {
+      "id": "did_control.assertion_method",
+      "category": "did_control",
+      "status": "pass",
+      "message": "Proof verificationMethod is controlled by issuer and authorized for assertionMethod",
+      "why_it_matters": "The proof should reference a key the issuer controls and authorizes for making claims."
+    }
+  ]
+}
 ```
 
 ## ELI5
