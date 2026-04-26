@@ -1,0 +1,17 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/did/v1"
+  ],
+  "id": "did:example:university",
+  "verificationMethod": [
+    {
+      "id": "did:example:university#other-key",
+      "type": "Multikey",
+      "controller": "did:example:university",
+      "publicKeyMultibase": "zExampleOtherUniversityPublicKey"
+    }
+  ],
+  "assertionMethod": [
+    "did:example:university#other-key"
+  ]
+}

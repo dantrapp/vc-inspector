@@ -1,0 +1,23 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/credentials/v2",
+    "https://example.org/employment/v1"
+  ],
+  "id": "urn:uuid:4c95c142-c118-482d-adf3-92301a27ec28",
+  "type": ["VerifiableCredential", "EmploymentCredential"],
+  "issuer": "did:example:employer",
+  "validFrom": "2025-02-01T08:00:00Z",
+  "validUntil": "2027-02-01T08:00:00Z",
+  "credentialSubject": {
+    "id": "did:example:worker789",
+    "role": "Field Engineer",
+    "employmentStatus": "active"
+  },
+  "proof": {
+    "type": "DataIntegrityProof",
+    "created": "2025-02-01T08:05:00Z",
+    "proofPurpose": "assertionMethod",
+    "verificationMethod": "did:example:employer#key-1",
+    "proofValue": "zExampleProofValue"
+  }
+}

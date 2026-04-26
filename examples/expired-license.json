@@ -1,0 +1,28 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/credentials/v2",
+    "https://example.org/mobile-driver-license/v1"
+  ],
+  "id": "urn:uuid:23096eba-ae51-4c62-a038-817e72a66c50",
+  "type": ["VerifiableCredential", "MobileDriverLicenseCredential"],
+  "issuer": "did:example:dmv",
+  "validFrom": "2021-06-01T10:00:00Z",
+  "validUntil": "2024-06-01T10:00:00Z",
+  "credentialSubject": {
+    "id": "did:example:person123",
+    "ageOver21": true,
+    "issuingAuthority": "Example DMV"
+  },
+  "credentialStatus": {
+    "id": "https://dmv.example/status/credentials/23096eba#list",
+    "type": "StatusList2021Entry",
+    "statusPurpose": "revocation"
+  },
+  "proof": {
+    "type": "DataIntegrityProof",
+    "created": "2021-06-01T10:03:00Z",
+    "proofPurpose": "assertionMethod",
+    "verificationMethod": "did:example:dmv#key-1",
+    "proofValue": "zExampleProofValue"
+  }
+}

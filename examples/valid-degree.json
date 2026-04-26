@@ -1,0 +1,32 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/credentials/v2",
+    "https://example.org/education/v1"
+  ],
+  "id": "urn:uuid:6f7c0a91-12dd-44fd-9b3f-1d9bd983a641",
+  "type": ["VerifiableCredential", "UniversityDegreeCredential"],
+  "issuer": {
+    "id": "did:example:university"
+  },
+  "validFrom": "2025-01-15T09:00:00Z",
+  "validUntil": "2029-01-15T09:00:00Z",
+  "credentialSubject": {
+    "id": "did:example:student123",
+    "degree": {
+      "type": "BachelorDegree",
+      "name": "Computer Science"
+    }
+  },
+  "credentialStatus": {
+    "id": "https://example.edu/status/credentials/6f7c0a91#list",
+    "type": "StatusList2021Entry",
+    "statusPurpose": "revocation"
+  },
+  "proof": {
+    "type": "DataIntegrityProof",
+    "created": "2025-01-15T09:01:00Z",
+    "proofPurpose": "assertionMethod",
+    "verificationMethod": "did:example:university#key-1",
+    "proofValue": "zExampleProofValue"
+  }
+}
