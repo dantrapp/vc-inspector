@@ -4,6 +4,12 @@ A small Rust tool for inspecting W3C Verifiable Credentials and DID proof wiring
 
 VC Inspector parses a credential JSON file, optionally checks it against an issuer DID Document, and prints a pass/warn/fail report for trust-relevant structure: issuer, subject, claims, dates, proof metadata, DID assertion-method control, and credential status.
 
+VC Inspector is a credential trust-boundary inspector for reviewing Verifiable Credential structure, DID proof wiring, and verification readiness before full cryptographic validation.
+
+## Why I Built This
+
+I built this to better understand the trust model behind standards-based digital identity systems: how credentials move from issuer to holder to verifier, where verification can fail, and why scoped, explicit validation matters before relying on a credential in a real system.
+
 ## Why This Exists
 
 Digital credential systems depend on precise trust boundaries. This project is intentionally boring: typed parsing, explicit validation, clear warnings, and no unsafe claims.
@@ -31,7 +37,7 @@ In plain English: someone issues a credential, a person or wallet holds it, and 
 - Is that method authorized for `assertionMethod`?
 - Does it include credential status metadata for revocation checks?
 
-## What It Does Not Do
+## Security Boundary
 
 VC Inspector does not perform cryptographic signature-byte verification.
 
@@ -41,7 +47,7 @@ This tool validates credential structure, offline DID proof wiring, and trust-re
 
 ## Use Case
 
-VC Inspector is a pre-verification diagnostic tool. It is useful when integrating credential issuance or verification flows and you need to answer basic questions before deeper cryptographic verification:
+VC Inspector is a credential trust-boundary inspector. It is useful when integrating credential issuance or verification flows and you need to answer basic questions before deeper cryptographic verification:
 
 - Is the credential malformed?
 - Is required metadata missing?
