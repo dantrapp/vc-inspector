@@ -4,18 +4,18 @@
 
 VC Inspector is a small Rust developer tool for inspecting the structure, DID proof wiring, and trust-relevant fields of W3C Verifiable Credentials.
 
-It is intentionally scoped as a portfolio project for SpruceID:
+It is intentionally scoped as a small, standards-aware verifier skeleton:
 
 - Show typed backend literacy in Rust.
 - Show standards-aware thinking around digital credentials.
 - Show disciplined security boundaries by checking DID key control without pretending to perform full cryptographic verification.
-- Produce output that a non-engineering stakeholder can understand.
+- Produce output that is easy to understand and audit.
 
 ## Target User
 
-Primary user: an engineer or forward-deployed engineer learning why a credential passes or fails basic structural checks.
+Primary user: an engineer learning why a credential passes or fails basic structural checks.
 
-Secondary audience: an operations or hiring stakeholder who wants evidence that the candidate can reason clearly about trust, risk, and implementation boundaries.
+Secondary audience: a technical reviewer who wants clear evidence of trust-boundary handling and implementation constraints.
 
 ## Non-Goals
 
@@ -97,4 +97,4 @@ issuer -> holder -> verifier
 - CLI works against all example credentials.
 - CLI supports `--did-doc` to check issuer DID proof wiring.
 - README explains what the tool does, what it does not do, and why that boundary matters.
-- The project can be explained to a Head of Operations as: "It checks whether a digital credential has the pieces a verifier would care about, including whether the claimed issuer document controls the key referenced by the proof, before deeper cryptographic verification."
+- The project can be explained as: "It checks whether a digital credential has the pieces a verifier would care about, including whether the claimed issuer document controls the key referenced by the proof, before deeper cryptographic verification."

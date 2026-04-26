@@ -6,7 +6,7 @@ VC Inspector parses a credential JSON file, optionally checks it against an issu
 
 ## Why This Exists
 
-SpruceID works in a domain where small mistakes can propagate across high-trust systems. This project is intentionally boring: typed parsing, explicit validation, clear warnings, and no unsafe claims.
+Digital credential systems depend on precise trust boundaries. This project is intentionally boring: typed parsing, explicit validation, clear warnings, and no unsafe claims.
 
 The goal is to understand the identity flow:
 
@@ -35,7 +35,7 @@ In plain English: someone issues a credential, a person or wallet holds it, and 
 
 VC Inspector does not perform cryptographic signature-byte verification.
 
-That is deliberate. Real verification requires resolving the issuer's DID Document through a trusted resolver, retrieving verification material, checking proof suites, canonicalizing the signed data, and using standards-aware libraries such as SpruceID's `ssi`.
+That is deliberate. Real verification requires resolving the issuer's DID Document through a trusted resolver, retrieving verification material, checking proof suites, canonicalizing the signed data, and using standards-aware identity libraries.
 
 This tool validates credential structure, offline DID proof wiring, and trust-relevant metadata before deeper verification.
 
